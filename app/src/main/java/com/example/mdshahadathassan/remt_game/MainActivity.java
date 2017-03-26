@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 getscore.setText(String.valueOf(score));
                 //initialize the value of highscore
                 int getSaveScore = preferences.getInt("highScore",0);
-                // checking
+                // checking with values
                 if(score>getSaveScore){
                     highscore.setText("High Score: "+score);
                     editor.putInt("highScore",score);
