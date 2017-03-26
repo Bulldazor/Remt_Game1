@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences preferences;
 
     SharedPreferences.Editor editor;
+    //file name of shared preference, name can be settd as ur wsih
     public final String PREFS_GAME="com.example.mdshahadathassan.remt_game.Game";
 
     @Override
@@ -27,8 +28,10 @@ public class MainActivity extends AppCompatActivity {
         getscore=(TextView)findViewById(R.id.Score);
         btnPlay=(Button)findViewById(R.id.Play);
         reset=(Button)findViewById(R.id.Reset);
-        preferences=getSharedPreferences(PREFS_GAME,MODE_PRIVATE);
-        editor=preferences.edit();
+
+        // Craetimg Shared pref name and mode of the game
+        preferences=getSharedPreferences(PREFS_GAME,MODE_PRIVATE); // initialize the shrd prfrnce
+        editor=preferences.edit(); // to edit the file
 
         // set initial score
         final int highScore= preferences.getInt("highScore",0);
@@ -37,17 +40,19 @@ public class MainActivity extends AppCompatActivity {
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //random generator
                 Random random=new Random();
                 int score = random.nextInt(1000);
-                highscore.setText(String.valueOf(score));
-
+                getscore.setText(String.valueOf(score));
+                //initialize the value of highscore
                 int getSaveScore = preferences.getInt("highScore",0);
-
+                // checking
                 if(score>getSaveScore){
                     highscore.setText("High Score: "+score);
                     editor.putInt("highScore",score);
                     editor.commit();
                 }
+
             }
         });
         reset.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
                 editor.putInt("highScore",0);
                 editor.commit();
                 highscore.setText(String.valueOf(0));
-
                 getscore.setText(String.valueOf(0));
             }
         });
